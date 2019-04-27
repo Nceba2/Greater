@@ -9,8 +9,9 @@
         <center>
                 <h1>GreaterRA</h1>
 
-                <form method="Post">
-                    <textarea name="responseArea">Hi. I am greater the first, simple reponsive application created by Nceba.How are you doing?</textarea>
+                <form method="post" action"/greater">
+                    <p>${ResponseText}</p>
+                    <textarea name="responseArea" rows="4" cols="50">Respond...</textarea>
                     <br/>
                     <input type="Submit" name="Submit" value="Submit"/>
                 </form>

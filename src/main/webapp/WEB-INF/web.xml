@@ -6,7 +6,7 @@
 
   <servlet>
     <servlet-name>greater</servlet-name>
-    <servlet-class>greater</servlet-class>
+    <servlet-class>Greater</servlet-class>
   </servlet>
 
     <welcome-file-list>

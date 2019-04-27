@@ -2,10 +2,19 @@
 <%@page import="java.util.Map" %>
 <html>
     <head>
-        <title>Hello, I am a Java web app!</title>
+        <title>GreaterRA</title>
     </head>
     <body>
-        <h1>Simple Java Web App Demo</h1>
-        <p>To invoke the java servlet click <a href="/greater">here</a></p>
+
+        <center>
+                <h1>GreaterRA</h1>
+
+                <form method="Post">
+                    <textarea name="responseArea">Hi. I am greater the first, simple reponsive application created by Nceba.How are you doing?</textarea>
+                    <br/>
+                    <input type="Submit" name="Submit" value="Submit"/>
+                </form>
+        </center>
+
     </body>
 </html>

@@ -1,6 +1,5 @@
 import org.junit.Test;
 import javax.servlet.annotation.WebServlet;
-
 import static org.junit.Assert.*;
 
 import java.io.IOException;
@@ -33,5 +32,18 @@ public class GeaterHttpTests {
 
         assertNotEquals(200,con.getResponseCode());
     }
+    @Test
+    public void testDoPostResponseAttributeTest() throws IOException {
+        URL url = new URL("http://localhost:8080/greater/");
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("POST");
 
+        assertEquals(200,con.getResponseCode());
+    }
+
+    @Test
+    public void HttpRequesterTest() throws IOException {
+        HttpRequester Hreq = new HttpRequester();
+        Hreq.HttpGet("http://www.google.com");//got to change this to post and url to API online portfolio
+    }
 }

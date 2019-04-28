@@ -44,6 +44,17 @@ public class GeaterHttpTests {
     @Test
     public void HttpRequesterTest() throws IOException {
         HttpRequester Hreq = new HttpRequester();
-        Hreq.HttpGet("http://www.google.com");//got to change this to post and url to API online portfolio
+        String URL = "http://ncebasobikwa.co.za/APIs/luluAPI.php?request=hello";
+        //the get uses "request=hello" the value comes from input on the view
+
+        assertEquals("Hello There",Hreq.HttpGet(URL));
+    }
+    @Test
+    public void HttpRequesterTestNull() throws IOException {
+        HttpRequester Hreq = new HttpRequester();
+        String URL = "http://ncebasobikwa.co.za/APIs/luluAPI.php?request=";
+        //the get uses "request=hello" the value comes from input on the view
+
+        assertNotEquals("Hello There",Hreq.HttpGet(URL));
     }
 }

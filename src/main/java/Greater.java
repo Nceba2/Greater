@@ -26,8 +26,12 @@ public class Greater extends HttpServlet {
             //writing response back from the request
             //this method handles all the post requests
 
-            String op = "response action worked...";//this would be replaced with a call from Http class
-            request.setAttribute("ResponseText",op);
+            String input = request.getParameter("responseArea");
+            String URL = "http://ncebasobikwa.co.za/APIs/luluAPI.php?request=";
+            HttpRequester httpRequester = new HttpRequester();
+            String results = httpRequester.HttpGet(URL+input);
+
+            request.setAttribute("ResponseText",results);
 
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
                 System.out.println("Post Method done");

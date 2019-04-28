@@ -7,11 +7,11 @@ import java.net.URL;
 public class HttpRequester {
 
     public String HttpGet(String url) throws IOException {
-        URL url1 = new URL(url);
+        URL url1 = new URL(url.replace(" ","%20"));
         HttpURLConnection con = (HttpURLConnection) url1.openConnection();
         con.setRequestMethod("GET");
-        BufferedReader in = new BufferedReader(new InputStreamReader(
-                con.getInputStream()));
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuffer response = new StringBuffer();
 

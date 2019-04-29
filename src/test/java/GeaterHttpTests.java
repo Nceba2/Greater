@@ -53,7 +53,6 @@ public class GeaterHttpTests {
     public void HttpRequesterTestNull() throws IOException {
         HttpRequester Hreq = new HttpRequester();
         String URL = "http://ncebasobikwa.co.za/APIs/luluAPI.php?request=";
-        //the get uses "request=hello" the value comes from input on the view
 
         assertNotEquals("Hello There",Hreq.HttpGet(URL));
     }

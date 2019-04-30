@@ -1,3 +1,4 @@
+import org.json.simple.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.*;
@@ -9,10 +10,9 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/greater")
 public class Greater extends HttpServlet {
 
-    String input = "";
-    String results = "";
-    String URL = "http://ncebasobikwa.co.za/APIs/luluAPI.php?request=";
-    HttpRequester httpRequester = new HttpRequester();
+    private String input = "";
+    private String JsonFile = "src/main/webapp/data.json";
+    private HttpRequester httpRequester = new HttpRequester();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -31,10 +31,11 @@ public class Greater extends HttpServlet {
             //writing response back from the request
             //this method handles all the post requests
 
+            JsonFileReader jsonFileReader = new JsonFileReader();
             input = request.getParameter("responseArea");
-            results = httpRequester.HttpGet(URL+input);
 
-            request.setAttribute("ResponseText",results);
+        request.setAttribute("ResponseText",
+                httpRequester.HttpGet(jsonFileReader.doRead(JsonFile).get("url")+input));
 
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
                 System.out.println("Post Method done");

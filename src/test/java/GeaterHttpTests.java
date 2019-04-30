@@ -1,7 +1,11 @@
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Test;
 import javax.servlet.annotation.WebServlet;
 import static org.junit.Assert.*;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -55,5 +59,38 @@ public class GeaterHttpTests {
         String URL = "http://ncebasobikwa.co.za/APIs/luluAPI.php?request=";
 
         assertNotEquals("Hello There",Hreq.HttpGet(URL));
+    }
+
+    /**
+     * The following tests are for testing the class to read a Json file
+     * Made the class to be able to read any .Json file
+     * **/
+    @Test
+    public void JsonFileReaderTest() throws IOException {
+        String file = "src/main/webapp/data.json";
+        JsonFileReader jsonFileReader = new JsonFileReader();
+
+        assertEquals("ok",jsonFileReader.doRead(file).get("test"));
+    }
+    @Test
+    public void JsonFileReaderTestDifferentValue() throws IOException, ParseException {
+        String file = "src/main/webapp/data.json";
+        JsonFileReader jsonFileReader = new JsonFileReader();
+
+        assertNotEquals("ok",jsonFileReader.doRead(file).get("url"));
+    }
+    @Test
+    public void JsonFileReaderTestNull() throws IOException {
+        String file = "src/main/webapp/data.json";
+        JsonFileReader jsonFileReader = new JsonFileReader();
+
+        assertNotEquals("ok",jsonFileReader.doRead(file).get(null));
+    }
+    @Test
+    public void JsonFileReaderTestNullIsEqualsNull() throws IOException {
+        String file = "src/main/webapp/data.json";
+        JsonFileReader jsonFileReader = new JsonFileReader();
+
+        assertEquals(null,jsonFileReader.doRead(file).get(null));
     }
 }

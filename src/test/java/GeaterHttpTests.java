@@ -1,13 +1,11 @@
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.junit.Before;
 import org.junit.Test;
 import javax.servlet.annotation.WebServlet;
 import static org.junit.Assert.*;
-
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 @WebServlet(urlPatterns = "/greater")
@@ -20,10 +18,22 @@ public class GeaterHttpTests {
      *
      **/
 
+    private URL url;
+    private String API_URL, file;
+    private JsonFileReader jsonFileReader;
+    private HttpRequester Hreq;
+    private HttpURLConnection con;
+
+    @Before
+    public void initialValues() throws MalformedURLException {
+        url = new URL("http://localhost:8080/greater/");
+        API_URL = "http://ncebasobikwa.co.za/APIs/luluAPI.php?request=";
+        file = "src/main/webapp/data.json";
+    }
+
     @Test
     public void testDoGetResponseCode() throws IOException {
-        URL url = new URL("http://localhost:8080/greater/");
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
 
         assertEquals(200,con.getResponseCode());
@@ -31,15 +41,14 @@ public class GeaterHttpTests {
     @Test
     public void testDoGetResponseCodeURL_NoExtendedParameters() throws IOException {
         URL url = new URL("http://localhost:8080/");
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
 
         assertNotEquals(200,con.getResponseCode());
     }
     @Test
     public void testDoPostResponseAttributeTest() throws IOException {
-        URL url = new URL("http://localhost:8080/greater/");
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("POST");
 
         assertEquals(200,con.getResponseCode());
@@ -47,18 +56,17 @@ public class GeaterHttpTests {
 
     @Test
     public void HttpRequesterTest() throws IOException {
-        HttpRequester Hreq = new HttpRequester();
-        String URL = "http://ncebasobikwa.co.za/APIs/luluAPI.php?request=hello";
+        Hreq = new HttpRequester();
+        API_URL = API_URL+"hello";
         //the get uses "request=hello" the value comes from input on the view
 
-        assertEquals("Hello There",Hreq.HttpGet(URL));
+        assertEquals("Hello There",Hreq.HttpGet(API_URL));
     }
     @Test
     public void HttpRequesterTestNull() throws IOException {
         HttpRequester Hreq = new HttpRequester();
-        String URL = "http://ncebasobikwa.co.za/APIs/luluAPI.php?request=";
 
-        assertNotEquals("Hello There",Hreq.HttpGet(URL));
+        assertNotEquals("Hello There",Hreq.HttpGet(API_URL));
     }
 
     /**
@@ -67,29 +75,25 @@ public class GeaterHttpTests {
      * **/
     @Test
     public void JsonFileReaderTest() throws IOException {
-        String file = "src/main/webapp/data.json";
-        JsonFileReader jsonFileReader = new JsonFileReader();
+         jsonFileReader = new JsonFileReader();
 
         assertEquals("ok",jsonFileReader.doRead(file).get("test"));
     }
     @Test
     public void JsonFileReaderTestDifferentValue() throws IOException, ParseException {
-        String file = "src/main/webapp/data.json";
-        JsonFileReader jsonFileReader = new JsonFileReader();
+         jsonFileReader = new JsonFileReader();
 
         assertNotEquals("ok",jsonFileReader.doRead(file).get("url"));
     }
     @Test
     public void JsonFileReaderTestNull() throws IOException {
-        String file = "src/main/webapp/data.json";
-        JsonFileReader jsonFileReader = new JsonFileReader();
+         jsonFileReader = new JsonFileReader();
 
         assertNotEquals("ok",jsonFileReader.doRead(file).get(null));
     }
     @Test
     public void JsonFileReaderTestNullIsEqualsNull() throws IOException {
-        String file = "src/main/webapp/data.json";
-        JsonFileReader jsonFileReader = new JsonFileReader();
+        jsonFileReader = new JsonFileReader();
 
         assertEquals(null,jsonFileReader.doRead(file).get(null));
     }

@@ -1,5 +1,3 @@
-import org.json.simple.JSONObject;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.*;
 import javax.servlet.http.HttpServlet;

@@ -3,10 +3,13 @@
 <html>
     <head>
         <title>GreaterRA</title>
+
+    <link href="style.css" rel="stylesheet">
     </head>
-    <body>
+    <body class="body">
 
         <center>
+        <div class="whitePanel">
                 <h1>GreaterRA</h1>
 
                 <form method="post" action"/greater">
@@ -15,6 +18,7 @@
                     <br/>
                     <input type="Submit" name="Submit" value="Submit"/>
                 </form>
+         </div>
         </center>
 
     </body>

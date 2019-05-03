@@ -16,7 +16,8 @@
                     <p>${ResponseText}</p>
                     <textarea name="responseArea" rows="4" cols="50">Respond...</textarea>
                     <br/>
-                    <input type="Submit" name="Submit" value="Submit"/>
+                    <br/>
+                    <input type="Submit" name="Submit" value="Submit" class="btn btn-primary" />
                 </form>
          </div>
         </center>

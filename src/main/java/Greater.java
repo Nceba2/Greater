@@ -33,7 +33,7 @@ public class Greater extends HttpServlet {
             input = request.getParameter("responseArea");
 
         request.setAttribute("ResponseText",
-                httpRequester.HttpGet(jsonFileReader.doRead(JsonFile).get("url")+input));
+                httpRequester.HttpGet(jsonFileReader.doRead(JsonFile).get("url") + input));
 
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
                 System.out.println("Post Method done");
